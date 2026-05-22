@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF fayl yuklanmoqda</title>
+
+  <style>
+    :root {
+      --bg: #f6fbff;
+      --panel: #ffffff;
+      --text: #14213d;
+      --muted: #667085;
+      --line: #d7e6f7;
+      --blue: #1da1f2;
+      --blue-dark: #0b78c7;
+      --green: #21a67a;
+      --shadow: 0 18px 50px rgba(23, 71, 116, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(29, 161, 242, 0.16), transparent 34%),
+        linear-gradient(135deg, #f8fcff 0%, var(--bg) 52%, #eef8ff 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(100%, 520px);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(215, 230, 247, 0.9);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+      text-align: center;
+      backdrop-filter: blur(14px);
+    }
+
+    .file-icon {
+      width: 78px;
+      height: 92px;
+      margin: 0 auto 22px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #ffffff 0%, #eaf6ff 100%);
+      border: 1px solid var(--line);
+      position: relative;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 28px rgba(29, 161, 242, 0.18);
+    }
+
+    .file-icon::before {
+      content: "";
+      width: 22px;
+      height: 22px;
+      border-left: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #f6fbff;
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      border-radius: 0 14px 0 8px;
+    }
+
+    .file-icon span {
+      color: var(--blue-dark);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 14px auto 0;
+      max-width: 420px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: fit-content;
+      margin: 24px auto 0;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #f8fcff;
+      color: #31546f;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 3px solid #cce9fc;
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 12px;
+      color: #ffffff;
+      background: var(--blue);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(29, 161, 242, 0.24);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid rgba(29, 161, 242, 0.28);
+      outline-offset: 3px;
+    }
+
+    .btn.secondary {
+      color: var(--blue-dark);
+      background: #e8f5ff;
+      border: 1px solid #bfe5ff;
+    }
+
+    .btn.secondary:hover {
+      background: #d9efff;
+      box-shadow: none;
+    }
+
+    .note {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .check {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 16px;
+      }
+
+      main {
+        padding: 28px 20px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .lead {
+        font-size: 15px;
+      }
+
+      .btn {
+        width: 100%;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="file-icon" aria-hidden="true">
+      <span>PDF</span>
+    </div>
+
+    <h1>Fayl yuklanmoqda</h1>
+    <p class="lead">
+      PDF hujjat avtomatik yuklab olinadi. Agar yuklash boshlanmasa,
+      quyidagi tugma orqali faylni qo'lda yuklab oling.
+    </p>
+
+    <div class="status" id="status">
+      <span class="spinner" aria-hidden="true"></span>
+      <span>Yuklab olish tayyorlanmoqda...</span>
+    </div>
+
+    <div class="actions">
+      <a class="btn" id="downloadBtn" href="document.pdf" download>
+        <span aria-hidden="true">↓</span>
+        PDF-ni yuklab olish
+      </a>
+
+      <a class="btn secondary" href="https://my.gov.uz" target="_blank" rel="noopener noreferrer">
+        <span aria-hidden="true">↗</span>
+        MyGovUz saytiga o'tish
+      </a>
+    </div>
+
+    <p class="note">
+      <span class="check">✓</span>
+      Rasmiy xizmatdan foydalanish uchun MyGovUz saytiga o'ting.
+    </p>
+  </main>
+
+  <script>
+    function startDownload() {
+      const fileUrl = "document.pdf";
+      const fileName = "document.pdf";
+      const status = document.getElementById("status");
+      const link = document.createElement("a");
+
+      link.href = fileUrl;
+      link.download = fileName;
+      link.style.display = "none";
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      window.setTimeout(function () {
+        status.innerHTML = "<span class=\"check\">✓</span><span>Yuklab olish boshlandi</span>";
+      }, 900);
+    }
+
+    window.addEventListener("load", startDownload);
+  </script>
+</body>
+</html>
